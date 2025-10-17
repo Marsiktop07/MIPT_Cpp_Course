@@ -13,6 +13,9 @@ void clear(subvector *qv);
 void destructor(subvector *qv);
 
 bool init(subvector *qv) {
+    if (qv == nullptr) {
+        return false;
+    }
     qv->mas = nullptr;
     qv->top = 0;
     qv->capacity = 0;
@@ -20,6 +23,9 @@ bool init(subvector *qv) {
 }
 
 bool push_back(subvector *qv, int d) {
+    if (qv == nullptr) {
+        return false;
+    }
     if (qv->top == qv->capacity) {
         unsigned int new_capacity = qv->capacity * 2;
         if (new_capacity == 0) {
@@ -33,6 +39,9 @@ bool push_back(subvector *qv, int d) {
 }
 
 int pop_back(subvector *qv) {
+    if (qv == nullptr) {
+        return false;
+    }
     if (qv->top == 0) {
         return 0;
     }
@@ -41,6 +50,9 @@ int pop_back(subvector *qv) {
 }
 
 bool resize(subvector *qv, unsigned int new_capacity) {
+    if (qv == nullptr) {
+        return false;
+    }
     if (new_capacity == 0) {
         destructor(qv);
         return true;
@@ -66,14 +78,23 @@ bool resize(subvector *qv, unsigned int new_capacity) {
 }
 
 void shrink_to_fit(subvector *qv) {
+    if (qv == nullptr) {
+        return;
+    }
     resize(qv, qv->top);
 }
 
 void clear(subvector *qv) {
+    if (qv == nullptr) {
+        return;
+    }
     qv->top = 0;
 }
 
 void destructor(subvector *qv) {
+    if (qv == nullptr) {
+        return;
+    }
     delete[] qv->mas;
     init(qv);
 }
